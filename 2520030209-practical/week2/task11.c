@@ -5,19 +5,13 @@
 
 int main() {
 pid_t pid = fork();
-if (pid < 0) {
-    perror("Fork failed");
-    return 1;
-}
 if (pid == 0) {
     printf("[Browser Child] Opening PDF viewer...\n");
     execlp("xdg-open", "xdg-open", "sample.pdf", (char *)NULL);
-    perror("Exec failed");
-    exit(1);
+    exit(0);
 } else {
     printf("[Browser Main] Continuing browser execution...\n");
     wait(NULL);
-    printf("[Browser Main] PDF Viewer process closed.\n");
 }
 return 0;
 }

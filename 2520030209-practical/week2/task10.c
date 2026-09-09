@@ -6,32 +6,15 @@
 
 int main() {
 pid_t pid;
-printf("Parent Process Started\n");
-printf("Parent PID : %d\n", getpid());
-printf("Parent PPID: %d\n\n", getppid());
+printf("Parent PID: %d, PPID: %d\n", getpid(), getppid());
 pid = fork();
-if (pid < 0) {
-    printf("Fork failed!\n");
-    return 1;
-}
 if (pid == 0) {
-    printf("Child Process\n");
-    printf("Child PID  : %d\n", getpid());
-    printf("Child PPID : %d\n\n", getppid());
-    printf("Child is Running...\n");
-    sleep(5);
-    printf("Child resumes execution.\n");
-    sleep(5);
-    printf("Child Process Terminating....\n");
+    printf("Child PID: %d, PPID: %d\n", getpid(), getppid());
+    sleep(2);
     exit(0);
 } else {
-    printf("Parent Process\n");
-    printf("Parent PID : %d\n", getpid());
-    printf("Child PID  : %d\n", pid);
-    printf("\nParent waiting for child...\n");
     wait(NULL);
-    printf("\nChild has terminated.\n");
-    printf("Parent Process Exiting...\n");
+    printf("Child finished execution.\n");
 }
 return 0;
 }
